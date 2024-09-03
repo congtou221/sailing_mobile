@@ -27,7 +27,9 @@ class SailingScaffold extends StatelessWidget {
           actions: <Widget>[
             SailingIconButton(
               iconData: Icons.photo_camera,
-              onPressed: _openCamera,
+              onPressed: () {
+                _openCamera(context);
+              },
             ),
           ],
         ),
@@ -40,11 +42,8 @@ class SailingScaffold extends StatelessWidget {
     });
   }
 
-  Future<void> _openCamera() async {
-    // final picker = ImagePicker();
-    // final pickedFile = await picker.getImage(source: ImageSource.camera);
-    // if (pickedFile != null) {
-    //   print(pickedFile.path);
-    // }
+  _openCamera(BuildContext context) {
+    navigateWithSlideTransition(
+        context, TakePictureScreen(camera: Global.camera));
   }
 }

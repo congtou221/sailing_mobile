@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
 
+import '../common/global.dart';
+import '../routes/camera_page/index.dart';
 import '../routes/home_page/drawer.dart';
 import '../states/index.dart';
+import '../ulib/tools.dart';
 import 'sailing_button.dart';
 
 part 'sailing_container.dart';

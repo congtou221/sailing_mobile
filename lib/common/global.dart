@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,6 +26,7 @@ class Global {
   // }
   static late SharedPreferences _prefs;
   static Setting setting = Setting();
+  static late CameraDescription camera;
 
   static initPrefs() async {
     _prefs = await SharedPreferences.getInstance();
@@ -68,6 +70,14 @@ class Global {
     ));
   }
 
+  static initCamera() async {
+    // Obtain a list of the available cameras on the device.
+    final cameras = await availableCameras();
+
+    // Get a specific camera from the list of available cameras.
+    camera = cameras.first;
+  }
+
   static Future<void> init() async {
     // 初始化Flutter基础结构
     WidgetsFlutterBinding.ensureInitialized();
@@ -75,6 +85,8 @@ class Global {
     await initPrefs();
     // 初始化网络请求
     Request.init();
+    // 初始化摄像头
+    await initCamera();
 
     initSystemUI();
   }
