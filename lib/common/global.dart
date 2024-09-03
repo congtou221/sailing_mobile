@@ -51,15 +51,21 @@ class Global {
   }
 
   static initSystemUI() {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent, // 设置状态栏为透明
-        systemNavigationBarColor: Colors.transparent, // 设置导航栏颜色（仅Android）
-        statusBarBrightness:
-            isDarkMode() ? Brightness.dark : Brightness.light, // 设置状态栏文字颜色为深色
-      ),
-    );
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive, overlays: []);
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky,
+    //     overlays: [SystemUiOverlay.top]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: [SystemUiOverlay.top]);
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: transparentColor,
+      statusBarBrightness: isDarkMode() ? Brightness.dark : Brightness.light,
+      statusBarIconBrightness:
+          isDarkMode() ? Brightness.dark : Brightness.light,
+      systemNavigationBarColor: transparentColor,
+      systemNavigationBarDividerColor: transparentColor,
+      systemNavigationBarIconBrightness:
+          isDarkMode() ? Brightness.dark : Brightness.light,
+      systemNavigationBarContrastEnforced: true,
+    ));
   }
 
   static Future<void> init() async {

@@ -12,7 +12,7 @@ class HomeDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      // backgroundColor: grayColor,
+        child: SailingScreenHeightContainer(
       child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -29,12 +29,12 @@ class HomeDrawer extends StatelessWidget {
                   child: _buildDrawerSetting(context)),
             )
           ]),
-    );
+    ));
   }
 
   Widget _buildDrawerHeader(BuildContext context) {
-    return SailingPaddingEven(
-        child: SafeArea(
+    return SailingPaddingTopSafeArea(
+        child: SailingPaddingEven(
       child: Column(children: [
         const SailingAvatar(src: "images/avatar.png"),
         SailingPaddingText(

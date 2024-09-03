@@ -42,6 +42,10 @@ double mediumPadding = 16;
 
 double bottomNavigationBarHeight = 77;
 
+double zeroSize = 0;
+
+double borderRadius = 6;
+
 TextStyle titleTextStyle = TextStyle(
     fontSize: largeTextSize,
     color: titleTextColor,
@@ -90,9 +94,13 @@ ThemeData lightTheme = ThemeData.light().copyWith(
   ).copyWith(surface: whiteColor),
   splashColor: transparentColor, // 设置水波纹颜色为透明
   highlightColor: transparentColor,
+  hoverColor: transparentColor,
+  focusColor: transparentColor,
   buttonTheme: ButtonThemeData(
-    splashColor: transparentColor, // 设置按钮水波纹颜色为透明
-    highlightColor: transparentColor, // 设置按钮高亮颜色为透明
+    splashColor: transparentColor, // 设置水波纹颜色为透明
+    highlightColor: transparentColor,
+    hoverColor: transparentColor,
+    focusColor: transparentColor,
   ),
   scaffoldBackgroundColor: whiteColor,
   appBarTheme: AppBarTheme(
@@ -102,10 +110,10 @@ ThemeData lightTheme = ThemeData.light().copyWith(
       toolbarHeight: 56.0),
   drawerTheme: DrawerThemeData(
       backgroundColor: grayColor,
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(6),
-          bottomLeft: Radius.circular(6),
+          topRight: Radius.circular(borderRadius),
+          bottomRight: Radius.circular(borderRadius),
         ),
       )),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -132,9 +140,13 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
   ).copyWith(surface: blackColor),
   splashColor: transparentColor, // 设置水波纹颜色为透明
   highlightColor: transparentColor,
+  hoverColor: transparentColor,
+  focusColor: transparentColor,
   buttonTheme: ButtonThemeData(
     splashColor: transparentColor, // 设置按钮水波纹颜色为透明
     highlightColor: transparentColor, // 设置按钮高亮颜色为透明
+    hoverColor: transparentColor,
+    focusColor: transparentColor,
   ),
   appBarTheme: AppBarTheme(
       centerTitle: true,
@@ -144,10 +156,10 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
       toolbarHeight: 56.0),
   drawerTheme: DrawerThemeData(
       backgroundColor: carbonBlackColor,
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(6),
-          bottomLeft: Radius.circular(6),
+          topRight: Radius.circular(borderRadius),
+          bottomRight: Radius.circular(borderRadius),
         ),
       )),
   // 文字主题

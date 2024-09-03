@@ -44,8 +44,7 @@ class SailingBottomNavigationBar extends StatelessWidget {
       onTap: () {
         onTap?.call(index);
       },
-      splashColor: Theme.of(context).splashColor,
-      highlightColor: Theme.of(context).highlightColor,
+      radius: zeroSize,
       child: Container(
         height: bottomNavigationBarHeight,
         alignment: Alignment.center,

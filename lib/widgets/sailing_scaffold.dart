@@ -18,7 +18,7 @@ class SailingScaffold extends StatelessWidget {
           title: title,
           leading: Builder(builder: (context) {
             return SailingIconButton(
-              icon: const Icon(Icons.menu),
+              iconData: Icons.menu,
               onPressed: () {
                 Scaffold.of(context).openDrawer();
               },
@@ -26,9 +26,7 @@ class SailingScaffold extends StatelessWidget {
           }),
           actions: <Widget>[
             SailingIconButton(
-              icon: const Icon(
-                Icons.photo_camera,
-              ),
+              iconData: Icons.photo_camera,
               onPressed: _openCamera,
             ),
           ],

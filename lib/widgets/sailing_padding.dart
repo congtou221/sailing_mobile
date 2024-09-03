@@ -84,3 +84,19 @@ class SailingPaddingLeftRight extends StatelessWidget {
     );
   }
 }
+
+class SailingPaddingTopSafeArea extends StatelessWidget {
+  const SailingPaddingTopSafeArea({super.key, required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final safeAreaTop = MediaQuery.of(context).padding.top;
+
+    return Padding(
+      padding: EdgeInsets.only(top: safeAreaTop),
+      child: child,
+    );
+  }
+}

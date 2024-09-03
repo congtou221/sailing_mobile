@@ -72,3 +72,23 @@ class SailingExpandedAlignmentcenterContainer extends StatelessWidget {
     ));
   }
 }
+
+class SailingScreenHeightContainer extends StatelessWidget {
+  const SailingScreenHeightContainer({super.key, required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final safeAreaTop = MediaQuery.of(context).padding.top;
+    final safeAreaBottom = MediaQuery.of(context).padding.bottom;
+
+    final drawerHeight =
+        MediaQuery.of(context).size.height - safeAreaTop - safeAreaBottom;
+    return Container(
+      height: drawerHeight,
+      // padding: EdgeInsets.only(bottom: safeAreaBottom),
+      child: child,
+    );
+  }
+}
