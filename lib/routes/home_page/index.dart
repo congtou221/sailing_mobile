@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 import '../../widgets/index.dart';
 import 'paper_bottom_nav.dart';
@@ -17,7 +18,7 @@ class _PaperHomePageState extends State<PaperHomePage> {
   @override
   Widget build(BuildContext context) {
     return SailingScaffold(
-        title: Text(titles[_selectedIndex]),
+        title: titles[_selectedIndex],
         body: _buildBody(context, _selectedIndex),
         bottomNavigationBar: _buildBottomNavigation(_selectedIndex));
   }

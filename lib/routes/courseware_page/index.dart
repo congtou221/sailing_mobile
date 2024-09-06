@@ -17,7 +17,7 @@ class _CoursewareHomeState extends State<CoursewareHomePage> {
   @override
   Widget build(BuildContext context) {
     return SailingScaffold(
-        title: Text(titles[_selectedIndex]),
+        title: titles[_selectedIndex],
         body: _buildBody(context, _selectedIndex),
         bottomNavigationBar: _buildBottomNavigation(_selectedIndex));
   }

@@ -39,6 +39,7 @@ dependencies:
   shared_preferences: ^2.2.3
   dio: ^5.5.0+1
   provider: ^6.1.2
+  tdesign_flutter: ^0.1.6
   camera: ^0.11.0+2
   flutter_oss_aliyun: ^6.4.2
 
@@ -71,6 +72,7 @@ flutter:
     - images/paper.png
     - images/team.png
     - images/courseware_litup.png
+    - assets/theme.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -4,20 +4,21 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 import '../models/cache.dart';
 import '../models/setting.dart';
 import '../ulib/request.dart';
 import '../ulib/tools.dart';
-import 'theme.dart';
+// import 'theme.dart';
 
-Map<String, ThemeData> _themes = {'light': lightTheme, 'dark': darkTheme};
+// Map<String, ThemeData> _themes = {'light': lightTheme, 'dark': darkTheme};
 
 class Global {
   // 是否为release版
   static bool get isRelease => const bool.fromEnvironment("dart.vm.product");
   // 获取主题列表
-  static Map<String, ThemeData> get themes => _themes;
+  // static Map<String, ThemeData> get themes => _themes;
   // 初始化Hive
   // static Future<void> initHive() async {
   // final directory = await getApplicationDocumentsDirectory();
@@ -27,6 +28,7 @@ class Global {
   static late SharedPreferences _prefs;
   static Setting setting = Setting();
   static late CameraDescription camera;
+  static late TDThemeData theme;
 
   static initPrefs() async {
     _prefs = await SharedPreferences.getInstance();
@@ -58,12 +60,12 @@ class Global {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.top]);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: transparentColor,
+      statusBarColor: Colors.transparent,
       statusBarBrightness: isDarkMode() ? Brightness.dark : Brightness.light,
       statusBarIconBrightness:
           isDarkMode() ? Brightness.dark : Brightness.light,
-      systemNavigationBarColor: transparentColor,
-      systemNavigationBarDividerColor: transparentColor,
+      systemNavigationBarColor: Colors.transparent,
+      systemNavigationBarDividerColor: Colors.transparent,
       systemNavigationBarIconBrightness:
           isDarkMode() ? Brightness.dark : Brightness.light,
       systemNavigationBarContrastEnforced: true,
@@ -78,6 +80,13 @@ class Global {
     camera = cameras.first;
   }
 
+  static initTheme() async {
+    TDTheme.needMultiTheme();
+    var jsonString = await rootBundle.loadString('assets/theme.json');
+    theme = TDThemeData.fromJson('sailing', jsonString) ??
+        TDThemeData.defaultData();
+  }
+
   static Future<void> init() async {
     // 初始化Flutter基础结构
     WidgetsFlutterBinding.ensureInitialized();
@@ -86,8 +95,10 @@ class Global {
     // 初始化网络请求
     Request.init();
     // 初始化摄像头
-    await initCamera();
+    // await initCamera();
 
     initSystemUI();
+
+    await initTheme();
   }
 }

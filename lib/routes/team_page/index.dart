@@ -22,7 +22,7 @@ class _TeamHomeState extends State<TeamHomePage> {
   @override
   Widget build(BuildContext context) {
     return SailingScaffold(
-        title: Text(titles[_selectedIndex]),
+        title: titles[_selectedIndex],
         body: _buildTeamBody(context, _selectedIndex),
         bottomNavigationBar: _buildBottomNavigation(_selectedIndex));
   }

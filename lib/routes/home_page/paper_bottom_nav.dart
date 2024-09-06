@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 import '../../widgets/sailing_bottom_navigation_bar.dart';
 
@@ -12,21 +13,43 @@ class PaperBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SailingBottomNavigationBar(
-        items: const [
-          {
-            'icon': Icons.description,
-            'title': '广场',
-          },
-          {'icon': Icons.person, 'title': '组卷'},
-          {
-            'icon': Icons.star,
-            'title': '收藏',
-          }
-        ],
-        currentIndex: selectedIndex,
-        selectedItemColor: Theme.of(context).colorScheme.primary,
-        unselectedItemColor: Theme.of(context).textTheme.bodyLarge?.color,
-        onTap: onBottomNavigationItemTapped);
+    return SailingBottomNavigationBar(items: [
+      {
+        'selectedicon': Icon(
+          TDIcons.app,
+          size: 20,
+          color: TDTheme.of(context).brandNormalColor,
+        ),
+        'unselectedicon': const Icon(
+          TDIcons.app,
+          size: 20,
+        ),
+        'title': '广场',
+      },
+      {
+        'selectedicon': Icon(
+          TDIcons.app,
+          size: 20,
+          color: TDTheme.of(context).brandNormalColor,
+        ),
+        'unselectedicon': const Icon(
+          TDIcons.app,
+          size: 20,
+        ),
+        'title': '组卷'
+      },
+      {
+        'selectedicon': Icon(
+          TDIcons.app,
+          size: 20,
+          color: TDTheme.of(context).brandNormalColor,
+        ),
+        'unselectedicon': const Icon(
+          TDIcons.app,
+          size: 20,
+        ),
+        'title': '收藏',
+      }
+    ], onTap: onBottomNavigationItemTapped);
   }
 }

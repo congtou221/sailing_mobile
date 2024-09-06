@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 import 'common/global.dart';
 import 'routes/courseware_page/index.dart';
@@ -25,9 +26,10 @@ class MyApp extends StatelessWidget {
         child: Consumer2<ThemeModel, UserModel>(
             builder: (BuildContext context, themeModel, userModel, child) {
           return MaterialApp(
-              theme: Global.themes['light'],
-              darkTheme: Global.themes['dark'],
-              themeMode: ThemeMode.system,
+              theme: ThemeData(
+                  extensions: [Global.theme],
+                  colorScheme: ColorScheme.light(
+                      primary: Global.theme.brandNormalColor)),
               home: const PaperHomePage(),
               routes: <String, WidgetBuilder>{
                 // 注册路由表

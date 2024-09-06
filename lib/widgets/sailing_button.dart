@@ -11,13 +11,21 @@ class SailingIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    // return InkWell(
+    //   onTap: onPressed,
+    //   // splashColor: transparentColor, // 移除水波纹效果
+    //   // highlightColor: transparentColor, // 移除高亮效果
+    //   radius: zeroSize,
+    //   child: Padding(
+    //     padding: EdgeInsets.all(spacingBaseTight),
+    //     child: Icon(iconData),
+    //   ),
+    // );
+    return GestureDetector(
       onTap: onPressed,
-      // splashColor: transparentColor, // 移除水波纹效果
-      // highlightColor: transparentColor, // 移除高亮效果
-      radius: zeroSize,
-      child: Padding(
-        padding: EdgeInsets.all(mediumPadding),
+      child: Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.all(spacingBaseTight),
         child: Icon(iconData),
       ),
     );

@@ -88,6 +88,7 @@ class SailingScreenHeightContainer extends StatelessWidget {
     return Container(
       height: drawerHeight,
       // padding: EdgeInsets.only(bottom: safeAreaBottom),
+      color: TDTheme.of(context).grayColor1,
       child: child,
     );
   }

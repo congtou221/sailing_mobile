@@ -8,8 +8,11 @@ class SailingPadding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 8.0),
+      padding: EdgeInsets.only(
+          left: spacingBase,
+          right: spacingBase,
+          top: spacingTight,
+          bottom: spacingTight),
       child: child,
     );
   }
@@ -23,7 +26,7 @@ class SailingPaddingText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 4.0),
+      padding: EdgeInsets.only(top: spacingExtraTight),
       child: child,
     );
   }
@@ -37,7 +40,7 @@ class SailingPaddingEven extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(spacingBase),
       child: child,
     );
   }
@@ -51,7 +54,7 @@ class SailingPaddingTop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
+      padding: EdgeInsets.only(top: spacingTight),
       child: child,
     );
   }
@@ -65,7 +68,7 @@ class SailingPaddingLeft extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16.0),
+      padding: EdgeInsets.only(left: spacingBase),
       child: child,
     );
   }
@@ -79,7 +82,7 @@ class SailingPaddingLeftRight extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+      padding: EdgeInsets.only(left: spacingTight, right: spacingTight),
       child: child,
     );
   }
