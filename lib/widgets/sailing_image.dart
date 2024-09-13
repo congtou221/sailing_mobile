@@ -7,11 +7,8 @@ class SailingAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipOval(
-        child: Image.asset(
-      src,
-      width: 56,
-    ));
+    return TDAvatar(
+        size: TDAvatarSize.large, type: TDAvatarType.normal, defaultUrl: src);
   }
 }
 

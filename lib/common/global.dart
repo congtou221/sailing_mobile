@@ -95,7 +95,7 @@ class Global {
     // 初始化网络请求
     Request.init();
     // 初始化摄像头
-    // await initCamera();
+    await initCamera();
 
     initSystemUI();
 

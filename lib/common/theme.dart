@@ -20,76 +20,76 @@ Color whiteColor = const Color(0xFFFFFFFF);
 Color blackColor = const Color(0xFF000000);
 Color carbonBlackColor = const Color(0xFF141218);
 
-Color titleTextColor = const Color(0xFF2A292D);
-Color secondaryTitleTextColor = const Color(0xFF514C5D);
-Color thirdaryTitleTextColor = const Color(0xFF737374);
-Color fourtharyTitleTextColor = const Color(0xA6000000);
+// Color titleTextColor = const Color(0xFF2A292D);
+// Color secondaryTitleTextColor = const Color(0xFF514C5D);
+// Color thirdaryTitleTextColor = const Color(0xFF737374);
+// Color fourtharyTitleTextColor = const Color(0xA6000000);
 
-Color titleTextColorDark = const Color(0xFFFFFFFF);
-Color secondaryTextColorDark = const Color(0xFFFFFFFF);
-Color thirdaryTextColorDark = const Color(0xFFFFFFFF);
-Color fourtharyTextColorDark = const Color(0xFFFFFFFF);
+// Color titleTextColorDark = const Color(0xFFFFFFFF);
+// Color secondaryTextColorDark = const Color(0xFFFFFFFF);
+// Color thirdaryTextColorDark = const Color(0xFFFFFFFF);
+// Color fourtharyTextColorDark = const Color(0xFFFFFFFF);
 
-double smallTitleTextSize = 16;
-double largeTextSize = 14;
-double mediumTextSize = 12;
+// double smallTitleTextSize = 16;
+// double largeTextSize = 14;
+// double mediumTextSize = 12;
 
-double smallTitleTextLineHeightSize = 22;
-double largeTextLineHeightSize = 20;
-double mediumTextLineHeightSize = 17;
+// double smallTitleTextLineHeightSize = 22;
+// double largeTextLineHeightSize = 20;
+// double mediumTextLineHeightSize = 17;
 
 double spacingExtraTight = 4;
 double spacingTight = 8;
 double spacingBaseTight = 12;
 double spacingBase = 16;
 
-double bottomNavigationBarHeight = 77;
+double navigationBarHeight = 48;
 
 double zeroSize = 0;
 
 double borderRadius = 6;
 
-TextStyle titleTextStyle = TextStyle(
-    fontSize: largeTextSize,
-    color: titleTextColor,
-    height: largeTextLineHeightSize / largeTextSize);
-TextStyle secondaryTitleTextStyle = TextStyle(
-    fontSize: largeTextSize,
-    color: secondaryTitleTextColor,
-    height: largeTextLineHeightSize / largeTextSize);
-TextStyle thirdaryTitleTextStyle = TextStyle(
-    fontSize: mediumTextSize,
-    color: thirdaryTitleTextColor,
-    height: mediumTextLineHeightSize / mediumTextSize);
-TextStyle fourtharyTitleTextStyle = TextStyle(
-    fontSize: mediumTextSize,
-    color: fourtharyTitleTextColor,
-    height: mediumTextLineHeightSize / mediumTextSize);
-TextStyle smalleadLineTextStyle = TextStyle(
-    fontSize: smallTitleTextSize,
-    color: fourtharyTitleTextColor,
-    height: smallTitleTextLineHeightSize / smallTitleTextSize);
+// TextStyle titleTextStyle = TextStyle(
+//     fontSize: largeTextSize,
+//     color: titleTextColor,
+//     height: largeTextLineHeightSize / largeTextSize);
+// TextStyle secondaryTitleTextStyle = TextStyle(
+//     fontSize: largeTextSize,
+//     color: secondaryTitleTextColor,
+//     height: largeTextLineHeightSize / largeTextSize);
+// TextStyle thirdaryTitleTextStyle = TextStyle(
+//     fontSize: mediumTextSize,
+//     color: thirdaryTitleTextColor,
+//     height: mediumTextLineHeightSize / mediumTextSize);
+// TextStyle fourtharyTitleTextStyle = TextStyle(
+//     fontSize: mediumTextSize,
+//     color: fourtharyTitleTextColor,
+//     height: mediumTextLineHeightSize / mediumTextSize);
+// TextStyle smalleadLineTextStyle = TextStyle(
+//     fontSize: smallTitleTextSize,
+//     color: fourtharyTitleTextColor,
+//     height: smallTitleTextLineHeightSize / smallTitleTextSize);
 
-TextStyle titleTextStyleDark = TextStyle(
-    fontSize: largeTextSize,
-    color: titleTextColorDark,
-    height: largeTextLineHeightSize / largeTextSize);
-TextStyle secondaryTitleTextStyleDark = TextStyle(
-    fontSize: largeTextSize,
-    color: secondaryTextColorDark,
-    height: largeTextLineHeightSize / largeTextSize);
-TextStyle thirdaryTitleTextStyleDark = TextStyle(
-    fontSize: mediumTextSize,
-    color: thirdaryTextColorDark,
-    height: mediumTextLineHeightSize / mediumTextSize);
-TextStyle fourtharyTitleTextStyleDark = TextStyle(
-    fontSize: mediumTextSize,
-    color: fourtharyTextColorDark,
-    height: mediumTextLineHeightSize / mediumTextSize);
-TextStyle smalleadLineTextStyleDark = TextStyle(
-    fontSize: smallTitleTextSize,
-    color: fourtharyTextColorDark,
-    height: smallTitleTextLineHeightSize / smallTitleTextSize);
+// TextStyle titleTextStyleDark = TextStyle(
+//     fontSize: largeTextSize,
+//     color: titleTextColorDark,
+//     height: largeTextLineHeightSize / largeTextSize);
+// TextStyle secondaryTitleTextStyleDark = TextStyle(
+//     fontSize: largeTextSize,
+//     color: secondaryTextColorDark,
+//     height: largeTextLineHeightSize / largeTextSize);
+// TextStyle thirdaryTitleTextStyleDark = TextStyle(
+//     fontSize: mediumTextSize,
+//     color: thirdaryTextColorDark,
+//     height: mediumTextLineHeightSize / mediumTextSize);
+// TextStyle fourtharyTitleTextStyleDark = TextStyle(
+//     fontSize: mediumTextSize,
+//     color: fourtharyTextColorDark,
+//     height: mediumTextLineHeightSize / mediumTextSize);
+// TextStyle smalleadLineTextStyleDark = TextStyle(
+//     fontSize: smallTitleTextSize,
+//     color: fourtharyTextColorDark,
+//     height: smallTitleTextLineHeightSize / smallTitleTextSize);
 
 // ThemeData lightTheme = ThemeData.light().copyWith(
 //   colorScheme: ColorScheme.fromSwatch(

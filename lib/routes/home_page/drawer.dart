@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sailing_mobile/routes/team_page/index.dart';
+import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 import '../../ulib/tools.dart';
 import '../../widgets/index.dart';
@@ -13,14 +14,16 @@ class HomeDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
         child: SailingScreenHeightContainer(
+      color: TDTheme.of(context).grayColor1,
       child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             SailingExpandedAlignmentleftContainer(
                 child: _buildDrawerHeader(context)),
             SailingPadding(
-                child: Text('功能切换',
-                    style: Theme.of(context).textTheme.titleSmall)),
+              child:
+                  TDText('功能切换', style: Theme.of(context).textTheme.bodySmall),
+            ),
             SailingExpandedAlignmentcenterContainer(
                 child: _buildDrawerMenu(context)),
             SailingPaddingTop(
@@ -38,7 +41,9 @@ class HomeDrawer extends StatelessWidget {
       child: Column(children: [
         const SailingAvatar(src: "images/avatar.png"),
         SailingPaddingText(
-            child: Text("Andy", style: Theme.of(context).textTheme.titleLarge))
+            child: TDText("Andy",
+                font: TDTheme.of(context).fontTitleSmall,
+                fontWeight: FontWeight.w600))
       ]),
     ));
   }
@@ -54,7 +59,7 @@ class HomeDrawer extends StatelessWidget {
       {'text': '班级', 'src': 'images/team.png', 'onTap': _openTeam},
     ];
 
-    return SailingPadding(
+    return SailingPaddingEven(
         child: SailingRowSpaceBetween(
             children: menuItems.map((item) {
       return SailingContainer(
@@ -63,8 +68,9 @@ class HomeDrawer extends StatelessWidget {
           children: [
             SailingMenuImage(src: item['src'] ?? ''),
             SailingPaddingText(
-                child: Text(item['text'] ?? '',
-                    style: Theme.of(context).textTheme.titleSmall))
+              child: TDText(item['text'] ?? '',
+                  style: Theme.of(context).textTheme.bodySmall),
+            )
           ],
         ),
       );
@@ -72,22 +78,12 @@ class HomeDrawer extends StatelessWidget {
   }
 
   Widget _buildDrawerSetting(BuildContext context) {
-    return SailingPadding(
-        child: SailingExpandedAlignmentcenterContainer(
-            child: SailingRowSpaceBetween(children: [
-      SailingContainer(
-          child: Row(
-        children: [
-          const Icon(Icons.settings),
-          SailingPaddingLeft(
-              child: Text(
-            '设置',
-            style: Theme.of(context).textTheme.titleMedium,
-          ))
-        ],
-      )),
-      const Icon(Icons.chevron_right)
-    ])));
+    return TDCell(
+      arrow: true,
+      title: '设置',
+      leftIconWidget:
+          Icon(TDIcons.setting, color: TDTheme.of(context).brandNormalColor),
+    );
   }
 
   void _openSetting(BuildContext context) {

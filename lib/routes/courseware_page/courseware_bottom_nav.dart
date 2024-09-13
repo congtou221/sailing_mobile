@@ -13,43 +13,46 @@ class CoursewareBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SailingBottomNavigationBar(items: [
-      {
-        'selectedicon': Icon(
-          TDIcons.app,
-          size: 20,
-          color: TDTheme.of(context).brandNormalColor,
-        ),
-        'unselectedicon': const Icon(
-          TDIcons.app,
-          size: 20,
-        ),
-        'title': '广场',
-      },
-      {
-        'selectedicon': Icon(
-          TDIcons.app,
-          size: 20,
-          color: TDTheme.of(context).brandNormalColor,
-        ),
-        'unselectedicon': const Icon(
-          TDIcons.app,
-          size: 20,
-        ),
-        'title': '组卷'
-      },
-      {
-        'selectedicon': Icon(
-          TDIcons.app,
-          size: 20,
-          color: TDTheme.of(context).brandNormalColor,
-        ),
-        'unselectedicon': const Icon(
-          TDIcons.app,
-          size: 20,
-        ),
-        'title': '收藏',
-      }
-    ], onTap: onBottomNavigationItemTapped);
+    return SailingBottomNavigationBar(
+        selectedIndex: selectedIndex,
+        items: [
+          {
+            'selectedicon': Icon(
+              TDIcons.app,
+              size: 20,
+              color: TDTheme.of(context).brandNormalColor,
+            ),
+            'unselectedicon': const Icon(
+              TDIcons.app,
+              size: 20,
+            ),
+            'title': '广场',
+          },
+          {
+            'selectedicon': Icon(
+              TDIcons.app,
+              size: 20,
+              color: TDTheme.of(context).brandNormalColor,
+            ),
+            'unselectedicon': const Icon(
+              TDIcons.app,
+              size: 20,
+            ),
+            'title': '组卷'
+          },
+          {
+            'selectedicon': Icon(
+              TDIcons.app,
+              size: 20,
+              color: TDTheme.of(context).brandNormalColor,
+            ),
+            'unselectedicon': const Icon(
+              TDIcons.app,
+              size: 20,
+            ),
+            'title': '收藏',
+          }
+        ],
+        onTap: onBottomNavigationItemTapped);
   }
 }

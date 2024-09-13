@@ -74,9 +74,11 @@ class SailingExpandedAlignmentcenterContainer extends StatelessWidget {
 }
 
 class SailingScreenHeightContainer extends StatelessWidget {
-  const SailingScreenHeightContainer({super.key, required this.child});
+  const SailingScreenHeightContainer(
+      {super.key, required this.child, this.color});
 
   final Widget child;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +90,7 @@ class SailingScreenHeightContainer extends StatelessWidget {
     return Container(
       height: drawerHeight,
       // padding: EdgeInsets.only(bottom: safeAreaBottom),
-      color: TDTheme.of(context).grayColor1,
+      color: color ?? whiteColor,
       child: child,
     );
   }
