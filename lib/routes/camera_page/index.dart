@@ -1,12 +1,16 @@
-// A screen that allows users to take a picture using a given camera.
 import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_oss_aliyun/flutter_oss_aliyun.dart';
+import 'package:sailing_mobile/common/theme.dart';
+import 'package:tdesign_flutter/tdesign_flutter.dart';
 
-class TakePictureScreen extends StatefulWidget {
-  const TakePictureScreen({
+import '../../ulib/tools.dart';
+import '../../widgets/index.dart';
+import '../mark_page/index.dart';
+
+class CameraScreenPage extends StatefulWidget {
+  const CameraScreenPage({
     super.key,
     required this.camera,
   });
@@ -14,128 +18,231 @@ class TakePictureScreen extends StatefulWidget {
   final CameraDescription camera;
 
   @override
-  TakePictureScreenState createState() => TakePictureScreenState();
+  CameraScreenPageState createState() => CameraScreenPageState();
 }
 
-class TakePictureScreenState extends State<TakePictureScreen> {
+class CameraScreenPageState extends State<CameraScreenPage> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
-
-  XFile? _imageFile;
+  late List<XFile> _imageFiles;
+  late ScrollController _scrollController;
+  late bool _readyToRender; // 用于控制iphone相机页面退出：提前关闭视频流，避免出现退出页面卡顿
+  late List<String> _paperList;
 
   @override
   void initState() {
     super.initState();
-    // To display the current output from the Camera,
-    // create a CameraController.
-    _controller = CameraController(
-      // Get a specific camera from the list of available cameras.
-      widget.camera,
-      // Define the resolution to use.
-      ResolutionPreset.medium,
-    );
-
-    // Next, initialize the controller. This returns a Future.
-    _initializeControllerFuture = _controller.initialize();
+    _init();
   }
 
   @override
   void dispose() {
-    // Dispose of the controller when the widget is disposed.
     _controller.dispose();
+    _scrollController.dispose();
+    deleteFiles(_imageFiles);
     super.dispose();
   }
 
-  Future<XFile?> _takePicture() async {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: SailingSizedContainer(
+            color: blackColor,
+            child: Column(
+              children: [
+                _renderCamera(),
+                _renderCalendar(),
+              ],
+            )));
+  }
+
+  _init() async {
+    _controller = CameraController(
+      widget.camera,
+      ResolutionPreset.max,
+      enableAudio: false,
+    );
+
+    _scrollController = ScrollController();
+
+    _initializeControllerFuture = _controller.initialize();
+
+    _controller.lockCaptureOrientation();
+
+    _imageFiles = [];
+
+    _readyToRender = true;
+
+    _paperList = ['模拟考试一', '模拟考试二'];
+  }
+
+  _calcScale() {
+    var camera = _controller.value;
+
+    if (!camera.isInitialized) return 1.0;
+
+    final size = MediaQuery.of(context).size;
+    var scale = size.aspectRatio * camera.aspectRatio;
+
+    // to prevent scaling down, invert the value
+    if (scale < 1) scale = 1 / scale;
+    return scale;
+  }
+
+  _renderCameraScreenNavBar() {
+    return SailingNavbar(
+        backgroundColor: transparentColor,
+        titleWidget: SailingPicker(list: _paperList, defaultIndex: 0),
+        leftBarItems: [
+          TDNavBarItem(
+              icon: TDIcons.close,
+              iconSize: iconSize,
+              iconColor: TDTheme.of(context).whiteColor1,
+              action: () {
+                setState(() {
+                  _readyToRender = false;
+                });
+                Navigator.pop(context);
+              }),
+        ],
+        rightBarItems: [
+          TDNavBarItem(
+            icon: TDIcons.chevron_down_rectangle,
+            iconSize: iconSize,
+            iconColor: TDTheme.of(context).whiteColor1,
+            action: _markPaper,
+          )
+        ]);
+  }
+
+  _renderCamera() {
+    return Expanded(
+        child: FutureBuilder<void>(
+      future: _initializeControllerFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done &&
+            _readyToRender) {
+          return Stack(children: [
+            SizedBox(
+              width: double.infinity,
+              height: double.infinity,
+              child: Transform.scale(
+                scale: _calcScale(),
+                child: Center(
+                  child: CameraPreview(_controller),
+                ),
+              ),
+            ),
+            Positioned(
+              width: MediaQuery.of(context).size.width,
+              child: _renderCameraScreenNavBar(),
+            ),
+            Positioned(
+                width: MediaQuery.of(context).size.width,
+                bottom: spacingExtraLoose,
+                child: Center(child: SailingCameraButton(onTap: _takePicture))),
+          ]);
+        } else {
+          return SailingSizedContainer(color: blackColor);
+        }
+      },
+    ));
+  }
+
+  _renderCalendar() {
+    return SafeArea(
+        child: SailingSizedContainer(
+            height: heightSmallItem + spacingTight * 2,
+            color: blackColor,
+            child: SailingPaddingEvenTight(
+                child: ListView.builder(
+                    controller: _scrollController,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: _imageFiles.length,
+                    itemBuilder: (BuildContext context, int index) => index == 0
+                        ? _renderCalendarItem(index)
+                        : SailingPaddingLeftTight(
+                            child: _renderCalendarItem(index))))));
+  }
+
+  _renderCalendarItem(int index) {
+    return SailingSizedContainer(
+        width: widthSmallItem,
+        height: heightSmallItem,
+        color: blackColor,
+        child: GestureDetector(
+            onTap: () {
+              _viewImages(index);
+            },
+            onLongPress: () {
+              _deletePicture(index);
+            },
+            child: TDImage(
+              imageFile: File(_imageFiles[index].path),
+              type: TDImageType.fitWidth,
+            )));
+  }
+
+  _viewImages(int index) {
+    TDImageViewer.showImageViewer(
+        context: context,
+        deleteBtn: false,
+        defaultIndex: index,
+        images: _imageFiles.map((file) => File(file.path)).toList(),
+        onDelete: (index) => _deletePicture(index));
+  }
+
+  _deletePicture(int index) {
+    showGeneralDialog(
+      context: context,
+      pageBuilder: (BuildContext buildContext, Animation<double> animation,
+          Animation<double> secondaryAnimation) {
+        return TDAlertDialog(
+          title: '提示',
+          content: '删除该页？',
+          rightBtnAction: () {
+            _removeFromCalendar(_imageFiles[index]);
+            Navigator.pop(context);
+          },
+        );
+      },
+    );
+    ;
+  }
+
+  Future<void> _takePicture() async {
     try {
       await _initializeControllerFuture;
       final image = await _controller.takePicture();
 
-      return image;
-    } catch (e) {
-      print('Error taking picture: $e');
-      return null;
+      _addToCalendar(image);
+    } catch (e) {}
+  }
+
+  _addToCalendar(XFile image) {
+    setState(() {
+      _imageFiles.add(image);
+    });
+    if (_scrollController.hasClients) {
+      _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Camera Full Screen')),
-      body: Column(
-        children: [
-          if (_imageFile == null)
-            Expanded(
-              child: FutureBuilder<void>(
-                future: _initializeControllerFuture,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return CameraPreview(_controller);
-                  } else {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                },
-              ),
-            ),
-          if (_imageFile != null)
-            Expanded(
-              child: Image.file(
-                File(_imageFile!.path),
-                fit: BoxFit.cover,
-              ),
-            ),
-        ],
-      ),
-      floatingActionButton: (_imageFile == null)
-          ? FloatingActionButton(
-              onPressed: () async {
-                final image = await _takePicture();
-                setState(() {
-                  _imageFile = image;
-                });
-              },
-              child: const Icon(Icons.camera_alt),
-            )
-          : FloatingActionButton(
-              onPressed: () async {
-                // final Response<dynamic> resp = await Client().putObjectFile(
-                //   "/Users/aaa.pdf",
-                //   fileKey: "aaa.png",
-                //   option: PutRequestOption(
-                //     onSendProgress: (count, total) {
-                //       print("send: count = $count, and total = $total");
-                //     },
-                //     onReceiveProgress: (count, total) {
-                //       print("receive: count = $count, and total = $total");
-                //     },
-                //     aclModel: AclMode.private,
-                //     callback: Callback(
-                //       callbackUrl: callbackUrl,
-                //       callbackBody:
-                //           "{\"mimeType\":\${mimeType}, \"filepath\":\${object},\"size\":\${size},\"bucket\":\${bucket},\"phone\":\${x:phone}}",
-                //       callbackVar: {"x:phone": "android"},
-                //       calbackBodyType: CalbackBodyType.json,
-                //     ),
-                //   ),
-                // );
-              },
-              child: const Icon(Icons.save),
-            ),
-    );
+  _removeFromCalendar(XFile image) {
+    setState(() {
+      _imageFiles.remove(image);
+    });
+    if (_scrollController.hasClients) {
+      _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+    }
   }
-}
 
-// A widget that displays the picture taken by the user.
-class DisplayPictureScreen extends StatelessWidget {
-  final String imagePath;
-
-  const DisplayPictureScreen({super.key, required this.imagePath});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Display the Picture')),
-      body: Image.file(File(imagePath)),
-    );
+  _markPaper() {
+    if (_imageFiles.isEmpty) {
+      TDToast.showIconText('图片为空',
+          icon: TDIcons.close_circle, context: context);
+      return;
+    }
+    navigateWithSlideTransition(context, MarkPage(imageFiles: _imageFiles));
   }
 }

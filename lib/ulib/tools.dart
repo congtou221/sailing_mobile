@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:archive/archive.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -32,4 +36,39 @@ void navigateWithSlideTransition(BuildContext context, Widget page,
       transitionDuration: duration,
     ),
   );
+}
+
+Future<File> zipImages(List<XFile> imageFiles) async {
+  final archive = Archive();
+
+  Future.forEach(imageFiles, (imageFile) {
+    final file = File(imageFile.path);
+    final bytes = file.readAsBytesSync();
+    final archiveFile = ArchiveFile(imageFile.name, bytes.length, bytes);
+    archive.addFile(archiveFile);
+  });
+
+  final zipEncoder = ZipEncoder();
+
+  final encodedArchive = zipEncoder.encode(archive);
+
+  if (encodedArchive == null) return File('');
+
+  final File zipFile = File(
+      '${Directory.systemTemp.path}/images_${DateTime.now().millisecondsSinceEpoch}.zip');
+
+  zipFile.writeAsBytesSync(encodedArchive);
+
+  return zipFile;
+}
+
+deleteFiles(List<XFile> imageFiles) async {
+  for (var imageFile in imageFiles) {
+    final file = File(imageFile.path);
+    if (await file.exists()) {
+      await file.delete();
+    } else {
+      print('File does not exist.');
+    }
+  }
 }

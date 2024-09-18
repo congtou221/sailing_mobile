@@ -42,6 +42,10 @@ dependencies:
   tdesign_flutter: ^0.1.6
   camera: ^0.11.0+2
   flutter_oss_aliyun: ^6.4.2
+  archive: ^3.6.1
+  native_device_orientation: ^2.0.3
+  permission_handler: ^11.3.1
+  app_settings: ^5.1.1
 
 dev_dependencies:
   flutter_test:

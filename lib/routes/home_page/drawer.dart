@@ -26,7 +26,7 @@ class HomeDrawer extends StatelessWidget {
             ),
             SailingExpandedAlignmentcenterContainer(
                 child: _buildDrawerMenu(context)),
-            SailingPaddingTop(
+            SailingPaddingTopTight(
               child: SailingExpandedContainer(
                   onTap: () => _openSetting(context),
                   child: _buildDrawerSetting(context)),
@@ -39,7 +39,7 @@ class HomeDrawer extends StatelessWidget {
     return SailingPaddingTopSafeArea(
         child: SailingPaddingEven(
       child: Column(children: [
-        const SailingAvatar(src: "images/avatar.png"),
+        const SailingAvatarLarge(src: "images/avatar.png"),
         SailingPaddingText(
             child: TDText("Andy",
                 font: TDTheme.of(context).fontTitleSmall,

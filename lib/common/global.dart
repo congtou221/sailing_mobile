@@ -10,6 +10,7 @@ import '../models/cache.dart';
 import '../models/setting.dart';
 import '../ulib/request.dart';
 import '../ulib/tools.dart';
+import '../ulib/permission_manager.dart';
 // import 'theme.dart';
 
 // Map<String, ThemeData> _themes = {'light': lightTheme, 'dark': darkTheme};
@@ -29,6 +30,8 @@ class Global {
   static Setting setting = Setting();
   static late CameraDescription camera;
   static late TDThemeData theme;
+  static late PermissionManager permissionManager;
+  static late CameraPermissionManager cameraPermissionManager;
 
   static initPrefs() async {
     _prefs = await SharedPreferences.getInstance();
@@ -70,6 +73,9 @@ class Global {
           isDarkMode() ? Brightness.dark : Brightness.light,
       systemNavigationBarContrastEnforced: true,
     ));
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp, // 只允许向上竖屏
+    ]);
   }
 
   static initCamera() async {
@@ -78,6 +84,12 @@ class Global {
 
     // Get a specific camera from the list of available cameras.
     camera = cameras.first;
+  }
+
+  static initPermissionManager() {
+    permissionManager = PermissionManager();
+    cameraPermissionManager =
+        CameraPermissionManager(permissionManager: permissionManager);
   }
 
   static initTheme() async {
@@ -90,15 +102,21 @@ class Global {
   static Future<void> init() async {
     // 初始化Flutter基础结构
     WidgetsFlutterBinding.ensureInitialized();
-    // 初始化本地持久化存储
-    await initPrefs();
-    // 初始化网络请求
-    Request.init();
-    // 初始化摄像头
-    await initCamera();
 
     initSystemUI();
 
-    await initTheme();
+    // 初始化网络请求
+    Request.init();
+
+    initPermissionManager();
+
+    try {
+      // 初始化本地持久化存储
+      await initPrefs();
+      // 初始化摄像头
+      await initCamera();
+
+      await initTheme();
+    } catch (e) {}
   }
 }

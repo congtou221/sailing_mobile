@@ -42,12 +42,19 @@ double spacingExtraTight = 4;
 double spacingTight = 8;
 double spacingBaseTight = 12;
 double spacingBase = 16;
+double spacingExtraLoose = 32;
+double spacingSuperLoose = 40;
 
+double iconSize = 24;
 double navigationBarHeight = 48;
 
 double zeroSize = 0;
 
 double borderRadius = 6;
+
+double widthSmallItem = 64;
+
+double heightSmallItem = 88;
 
 // TextStyle titleTextStyle = TextStyle(
 //     fontSize: largeTextSize,

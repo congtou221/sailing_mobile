@@ -17,17 +17,12 @@ class SailingScaffold extends StatelessWidget {
     return Consumer<ThemeModel>(builder: (context, themeModel, child) {
       return Scaffold(
         key: scaffoldKey,
-        appBar: TDNavBar(
-          padding:
-              EdgeInsets.only(left: spacingBaseTight, right: spacingBaseTight),
-          height: navigationBarHeight,
+        appBar: SailingNavbar(
           title: title,
-          screenAdaptation: true,
-          useDefaultBack: false,
           leftBarItems: [
             TDNavBarItem(
               icon: TDIcons.ellipsis,
-              iconSize: 24,
+              iconSize: iconSize,
               action: () {
                 _openDrawer(scaffoldKey);
               },
@@ -36,7 +31,7 @@ class SailingScaffold extends StatelessWidget {
           rightBarItems: [
             TDNavBarItem(
               icon: TDIcons.photo,
-              iconSize: 24,
+              iconSize: iconSize,
               action: () {
                 _openCamera(context);
               },
@@ -52,9 +47,13 @@ class SailingScaffold extends StatelessWidget {
     });
   }
 
-  _openCamera(BuildContext context) {
-    navigateWithSlideTransition(
-        context, TakePictureScreen(camera: Global.camera));
+  _openCamera(BuildContext context) async {
+    Global.cameraPermissionManager.requestCameraPermission(context, () {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => CameraScreenPage(camera: Global.camera)));
+    });
   }
 
   _openDrawer(GlobalKey<ScaffoldState> scaffoldKey) {

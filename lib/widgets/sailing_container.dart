@@ -12,7 +12,7 @@ class SailingContainer extends StatelessWidget {
         onTap: onTap ?? () => {},
         child: Container(
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surface,
+            color: TDTheme.of(context).whiteColor1,
           ),
           child: child,
         ));
@@ -90,6 +90,31 @@ class SailingScreenHeightContainer extends StatelessWidget {
     return Container(
       height: drawerHeight,
       // padding: EdgeInsets.only(bottom: safeAreaBottom),
+      color: color ?? whiteColor,
+      child: child,
+    );
+  }
+}
+
+class SailingSizedContainer extends StatelessWidget {
+  const SailingSizedContainer(
+      {super.key, this.child, this.color, this.height, this.width});
+
+  final Widget? child;
+  final Color? color;
+  final double? height;
+  final double? width;
+
+  @override
+  Widget build(BuildContext context) {
+    // final safeAreaTop = MediaQuery.of(context).padding.top;
+    // final safeAreaBottom = MediaQuery.of(context).padding.bottom;
+
+    // final drawerHeight =
+    //     MediaQuery.of(context).size.height - safeAreaTop - safeAreaBottom;
+    return Container(
+      height: height,
+      width: width,
       color: color ?? whiteColor,
       child: child,
     );
