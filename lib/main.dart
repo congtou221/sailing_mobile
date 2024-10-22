@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
+// import 'package:fps_monitor/widget/custom_widget_inspector.dart';
 
 import 'common/global.dart';
 import 'routes/courseware_page/index.dart';
@@ -18,6 +20,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // GlobalKey<NavigatorState> globalKey = GlobalKey();
+    // WidgetsBinding.instance.addPostFrameCallback((t) {
+    //   overlayState = globalKey.currentState!.overlay!;
+    // });
+
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => ThemeModel()),
@@ -26,6 +33,9 @@ class MyApp extends StatelessWidget {
         child: Consumer2<ThemeModel, UserModel>(
             builder: (BuildContext context, themeModel, userModel, child) {
           return MaterialApp(
+              // navigatorKey: globalKey,
+              // builder: (ctx, child) =>
+              //     CustomWidgetInspector(child: child ?? Container()),
               theme: ThemeData(
                   extensions: [Global.theme],
                   colorScheme: ColorScheme.light(

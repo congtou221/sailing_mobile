@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:sailing_mobile/common/global.dart';
 
@@ -6,6 +7,7 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 import '../common/theme.dart';
 
+import '../routes/camera_awesome_page/index.dart';
 import '../routes/camera_page/index.dart';
 import '../routes/home_page/drawer.dart';
 import '../states/index.dart';

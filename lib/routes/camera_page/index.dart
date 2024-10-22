@@ -2,8 +2,11 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sailing_mobile/common/theme.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
+import 'package:camerawesome/camerawesome_plugin.dart';
+import 'package:camerawesome/pigeon.dart';
 
 import '../../ulib/tools.dart';
 import '../../widgets/index.dart';
@@ -116,6 +119,15 @@ class CameraScreenPageState extends State<CameraScreenPage> {
   }
 
   _renderCamera() {
+    // return Container(
+    //   color: Colors.white,
+    //   child: CameraAwesomeBuilder.awesome(
+    //     saveConfig: SaveConfig.photoAndVideo(),
+    //     onMediaTap: (mediaCapture) {
+    //       // OpenFile.open(mediaCapture.filePath);
+    //     },
+    //   ),
+    // );
     return Expanded(
         child: FutureBuilder<void>(
       future: _initializeControllerFuture,

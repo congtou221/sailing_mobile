@@ -53,8 +53,8 @@ android {
         targetSdk = flutter.targetSdkVersion
         // versionCode = flutterVersionCode.toInteger()
         // versionName = flutterVersionName
-        versionCode = 5
-        versionName = "test_1.0.4"
+        versionCode = 7
+        versionName = "test_1.0.6"
     }
     signingConfigs {
         release {

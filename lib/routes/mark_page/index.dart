@@ -20,7 +20,7 @@ class MarkPage extends StatefulWidget {
 }
 
 class MarkPageState extends State<MarkPage> {
-  bool loading = true;
+  late bool loading;
 
   late Details details;
 
@@ -28,12 +28,15 @@ class MarkPageState extends State<MarkPage> {
   void initState() {
     super.initState();
 
+    loading = true;
+
     _initDetails();
   }
 
   @override
   Widget build(BuildContext context) {
     return loading ? _renderLoading() : _renderMark();
+    // return Container(color: Colors.white);
   }
 
   _renderLoading() {

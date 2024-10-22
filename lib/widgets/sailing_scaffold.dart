@@ -50,9 +50,7 @@ class SailingScaffold extends StatelessWidget {
   _openCamera(BuildContext context) async {
     Global.cameraPermissionManager.requestCameraPermission(context, () {
       Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => CameraScreenPage(camera: Global.camera)));
+          context, MaterialPageRoute(builder: (context) => const CameraPage()));
     });
   }
 
